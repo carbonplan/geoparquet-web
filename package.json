@@ -1,0 +1,39 @@
+{
+  "name": "simple-site",
+  "version": "1.0.0",
+  "description": "simple template for a website using our web stack",
+  "main": "index.js",
+  "scripts": {
+    "dev": "NODE_ENV=development next -p 4000",
+    "build": "next build",
+    "start": "next start",
+    "format": "prettier --write '*.js' '{components,pages}/**/*.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carbonplan/simple-site.git"
+  },
+  "keywords": [
+    "next",
+    "theme-ui",
+    "react"
+  ],
+  "author": "freeman-lab",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/carbonplan/simple-site/issues"
+  },
+  "homepage": "https://github.com/carbonplan/simple-site#readme",
+  "dependencies": {
+    "@carbonplan/components": "^13.1.1",
+    "@carbonplan/layouts": "^5.1.0",
+    "@carbonplan/theme": "^7.0.0",
+    "next": "^14.2.23",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "theme-ui": "^0.15.3"
+  },
+  "devDependencies": {
+    "prettier": "2.3.2"
+  }
+}
