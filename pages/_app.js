@@ -1,8 +1,11 @@
+import React from 'react'
 import Script from 'next/script'
 import { ThemeProvider } from 'theme-ui'
 import '@carbonplan/components/fonts.css'
 import '@carbonplan/components/globals.css'
 import theme from '@carbonplan/theme'
+import Layout from '../components/Layout'
+import { MapProvider } from '../components/MapContext'
 
 const App = ({ Component, pageProps }) => {
   return (
@@ -14,7 +17,11 @@ const App = ({ Component, pageProps }) => {
           src='https://carbonplan.org/js/script.file-downloads.outbound-links.js'
         />
       )}
-      <Component {...pageProps} />
+      <MapProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </MapProvider>
     </ThemeProvider>
   )
 }

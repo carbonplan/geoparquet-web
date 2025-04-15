@@ -1,15 +1,12 @@
-import { Layout, Row, Column } from '@carbonplan/components'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 
-const Index = () => {
-  return (
-    <Layout>
-      <Row sx={{ fontSize: [4, 5, 6, 7], my: [5, 6, 7, 8] }}>
-        <Column start={[1, 2, 2, 2]} width={[6]}>
-          This is a sample site
-        </Column>
-      </Row>
-    </Layout>
-  )
+export default function Home() {
+  const router = useRouter()
+
+  useEffect(() => {
+    router.replace('/singleparquet')
+  }, [router])
+
+  return null
 }
-
-export default Index
