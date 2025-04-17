@@ -2,7 +2,8 @@ import { useEffect } from 'react'
 import { useMap } from '../components/MapContext'
 
 const BASE_URL =
-  'https://carbonplan-scratch.s3.us-west-2.amazonaws.com/OCR/LA_region_coiled.pmtiles'
+  'https://carbonplan-ocr.s3.us-west-2.amazonaws.com/intermediate/fire-risk/vector/CA_12_risk_scores_auto_drop_smallest.pmtiles'
+const layerName = 'CA_12_risk_scoresfgb'
 
 export default function PmtilesPage() {
   const { map } = useMap()
@@ -21,7 +22,7 @@ export default function PmtilesPage() {
       id: 'buildings-fill',
       type: 'fill',
       source: 'buildings',
-      'source-layer': 'LA_regionfgb',
+      'source-layer': layerName,
       paint: {
         'fill-color': '#627BC1',
         'fill-opacity': 0.4,
@@ -32,7 +33,7 @@ export default function PmtilesPage() {
       id: 'buildings-line',
       type: 'line',
       source: 'buildings',
-      'source-layer': 'LA_regionfgb',
+      'source-layer': layerName,
       paint: {
         'line-color': '#627BC1',
         'line-opacity': 0.8,

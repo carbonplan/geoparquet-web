@@ -6,10 +6,12 @@ import { GeoArrowPolygonLayer } from '@geoarrow/deck.gl-layers'
 import { useMap } from '../components/MapContext'
 
 const BASE_URL =
-  'https://carbonplan-scratch.s3.us-west-2.amazonaws.com/OCR/LA_region_quadkey13_100kb.parquet'
+  'https://carbonplan-share.s3.us-west-2.amazonaws.com/vector_web/geoparquet/CONUS/CONUS_rgs_1mb_quadkey_12.parquet'
+
+// https://carbonplan-share.s3.us-west-2.amazonaws.com/vector_web/geoparquet/CONUS/CONUS_rgs_1mb_quadkey_12.parquet/quadkey_12%3D021223111102/data_0.parquet
 
 const MIN_ZOOM = 10
-const QUADKEY_ZOOM = 13
+const QUADKEY_ZOOM = 12
 
 function calculateQuadkeys(map, targetZoom = QUADKEY_ZOOM) {
   if (map.getZoom() < MIN_ZOOM) {
@@ -179,6 +181,12 @@ export default function QuadkeyPage() {
 
     const readOptions = {
       bbox,
+      bboxPaths: {
+        xmin: ['bbox', 'xmin'],
+        ymin: ['bbox', 'ymin'],
+        xmax: ['bbox', 'xmax'],
+        ymax: ['bbox', 'ymax'],
+      },
     }
 
     set_panic_hook()
@@ -196,8 +204,8 @@ export default function QuadkeyPage() {
         getPolygon: jsTable.getChild('geometry') || undefined,
         filled: true,
         stroked: true,
-        getFillColor: [0, 100, 60, 160],
-        getLineColor: [255, 0, 0],
+        getFillColor: [0.4, 98, 123, 193],
+        getLineColor: [98, 123, 193],
         lineWidthMinPixels: 1,
         pickable: true,
       })

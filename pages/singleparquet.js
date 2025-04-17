@@ -6,7 +6,7 @@ import { GeoArrowPolygonLayer } from '@geoarrow/deck.gl-layers'
 import { useMap } from '../components/MapContext'
 
 const BASE_URL =
-  'https://carbonplan-scratch.s3.us-west-2.amazonaws.com/OCR/LA_region_geoarrow_500000_RGS.parquet'
+  'https://carbonplan-share.s3.us-west-2.amazonaws.com/vector_web/geoparquet/LA_region/LA_rgs_500kb.parquet'
 
 const MIN_ZOOM = 13
 
@@ -96,6 +96,12 @@ export default function SingleParquetPage() {
 
     const readOptions = {
       bbox,
+      bboxPaths: {
+        xmin: ['bbox', 'xmin'],
+        ymin: ['bbox', 'ymin'],
+        xmax: ['bbox', 'xmax'],
+        ymax: ['bbox', 'ymax'],
+      },
     }
 
     set_panic_hook()
@@ -111,8 +117,8 @@ export default function SingleParquetPage() {
         getPolygon: jsTable.getChild('geometry') || undefined,
         filled: true,
         stroked: true,
-        getFillColor: [0, 100, 60, 160],
-        getLineColor: [255, 0, 0],
+        getFillColor: [0.4, 98, 123, 193],
+        getLineColor: [98, 123, 193],
         lineWidthMinPixels: 1,
         pickable: true,
       })

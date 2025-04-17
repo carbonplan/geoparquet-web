@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
-import { Box, Container } from 'theme-ui'
+import { Box, Container, useThemeUI } from 'theme-ui'
 import { Sidebar, SidebarDivider } from '@carbonplan/layouts'
 import { Dimmer, Header } from '@carbonplan/components'
 import Picker from './Picker'
 
 export default function Layout({ children }) {
   const [expanded, setExpanded] = useState(true)
+
+  const { theme } = useThemeUI()
 
   return (
     <>
@@ -25,6 +27,7 @@ export default function Layout({ children }) {
           bottom: 0,
           width: '100%',
           overflowX: 'hidden',
+          scrollbarColor: `${theme?.colors?.hinted} ${theme?.colors?.background}`,
         }}
       >
         <Box>

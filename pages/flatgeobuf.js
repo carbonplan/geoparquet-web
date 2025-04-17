@@ -3,7 +3,7 @@ import { geojson } from 'flatgeobuf'
 import { useMap } from '../components/MapContext'
 
 const BASE_URL =
-  'https://carbonplan-scratch.s3.us-west-2.amazonaws.com/OCR/LA_region.fgb'
+  'https://carbonplan-ocr.s3.us-west-2.amazonaws.com/intermediate/fire-risk/vector/CONUS_12_risk_scores.fgb'
 
 const MIN_ZOOM = 13
 
