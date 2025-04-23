@@ -6,7 +6,7 @@ import { GeoArrowPolygonLayer } from '@geoarrow/deck.gl-layers'
 import { useMap } from '../components/MapContext'
 
 const BASE_URL =
-  'https://carbonplan-share.s3.us-west-2.amazonaws.com/vector_web/geoparquet/CA/CA_s2_level_13_partition_level_8_RGS2048.parquet/'
+  'https://carbonplan-share.s3.amazonaws.com/vector_web/geoparquet/CA/CA_s2_level_15_partition_level_8_RGS5k.parquet'
 
 // https://carbonplan-share.s3.us-west-2.amazonaws.com/vector_web/geoparquet/CONUS/CONUS_rgs_1mb_quadkey_12.parquet/quadkey_12%3D021223111102/data_0.parquet
 
