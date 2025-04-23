@@ -6,7 +6,7 @@ import { GeoArrowPolygonLayer } from '@geoarrow/deck.gl-layers'
 import { useMap } from '../components/MapContext'
 
 const BASE_URL =
-  'https://carbonplan-share.s3.us-west-2.amazonaws.com/vector_web/geoparquet/LA_region/LA_rgs_500kb.parquet'
+  'https://carbonplan-share.s3.us-west-2.amazonaws.com/vector_web/geoparquet/LA_region/LA_rgs_1mb.parquet'
 
 const MIN_ZOOM = 13
 
@@ -38,6 +38,7 @@ export default function SingleParquetPage() {
 
       try {
         const dataset = await new ParquetFile(BASE_URL)
+
         console.log('Parquet data fetched successfully', dataset)
         parquetRef.current = dataset
         updateData()
@@ -96,6 +97,7 @@ export default function SingleParquetPage() {
 
     const readOptions = {
       bbox,
+      'ARROW:extension:name': 'geoarrow.polygon',
       bboxPaths: {
         xmin: ['bbox', 'xmin'],
         ymin: ['bbox', 'ymin'],
@@ -121,6 +123,7 @@ export default function SingleParquetPage() {
         getLineColor: [98, 123, 193],
         lineWidthMinPixels: 1,
         pickable: true,
+        beforeId: 'buildings',
       })
 
       overlayRef.current.setProps({

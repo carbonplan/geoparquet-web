@@ -14,7 +14,7 @@ const backgroundColor = '#1b1e23'
 
 const mapTheme = {
   ...namedFlavor('black'),
-  buildings: backgroundColor,
+  buildings: '#00000000',
   background: backgroundColor,
   earth: backgroundColor,
   park_a: backgroundColor,

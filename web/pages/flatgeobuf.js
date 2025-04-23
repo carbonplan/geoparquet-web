@@ -21,27 +21,33 @@ export default function FlatGeoBufPage() {
       data: { type: 'FeatureCollection', features: [] },
     })
 
-    map.addLayer({
-      id: 'buildings-fill',
-      type: 'fill',
-      source: 'buildings',
-      paint: {
-        'fill-color': '#627BC1',
-        'fill-opacity': 0.4,
+    map.addLayer(
+      {
+        id: 'buildings-fill',
+        type: 'fill',
+        source: 'buildings',
+        paint: {
+          'fill-color': '#627BC1',
+          'fill-opacity': 0.4,
+        },
       },
-    })
+      'buildings'
+    )
 
     // Add line layer
-    map.addLayer({
-      id: 'buildings-line',
-      type: 'line',
-      source: 'buildings',
-      paint: {
-        'line-color': '#627BC1',
-        'line-opacity': 0.8,
-        'line-width': 1,
+    map.addLayer(
+      {
+        id: 'buildings-line',
+        type: 'line',
+        source: 'buildings',
+        paint: {
+          'line-color': '#627BC1',
+          'line-opacity': 0.8,
+          'line-width': 1,
+        },
       },
-    })
+      'buildings'
+    )
 
     updateData()
 

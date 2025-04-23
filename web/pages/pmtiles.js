@@ -18,28 +18,34 @@ export default function PmtilesPage() {
       url: `pmtiles://${BASE_URL}`,
     })
 
-    map.addLayer({
-      id: 'buildings-fill',
-      type: 'fill',
-      source: 'buildings',
-      'source-layer': layerName,
-      paint: {
-        'fill-color': '#627BC1',
-        'fill-opacity': 0.4,
+    map.addLayer(
+      {
+        id: 'buildings-fill',
+        type: 'fill',
+        source: 'buildings',
+        'source-layer': layerName,
+        paint: {
+          'fill-color': '#627BC1',
+          'fill-opacity': 0.4,
+        },
       },
-    })
+      'buildings'
+    )
 
-    map.addLayer({
-      id: 'buildings-line',
-      type: 'line',
-      source: 'buildings',
-      'source-layer': layerName,
-      paint: {
-        'line-color': '#627BC1',
-        'line-opacity': 0.8,
-        'line-width': 1,
+    map.addLayer(
+      {
+        id: 'buildings-line',
+        type: 'line',
+        source: 'buildings',
+        'source-layer': layerName,
+        paint: {
+          'line-color': '#627BC1',
+          'line-opacity': 0.8,
+          'line-width': 1,
+        },
       },
-    })
+      'buildings'
+    )
 
     return () => {
       try {

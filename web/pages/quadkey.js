@@ -6,12 +6,15 @@ import { GeoArrowPolygonLayer } from '@geoarrow/deck.gl-layers'
 import { useMap } from '../components/MapContext'
 
 const BASE_URL =
-  'https://carbonplan-share.s3.us-west-2.amazonaws.com/vector_web/geoparquet/CONUS/CONUS_rgs_1mb_quadkey_12.parquet'
+  'https://carbonplan-share.s3.us-west-2.amazonaws.com/vector_web/geoparquet/CA/CA_s2_level_13_partition_level_8_RGS2048.parquet/'
 
 // https://carbonplan-share.s3.us-west-2.amazonaws.com/vector_web/geoparquet/CONUS/CONUS_rgs_1mb_quadkey_12.parquet/quadkey_12%3D021223111102/data_0.parquet
 
-const MIN_ZOOM = 10
-const QUADKEY_ZOOM = 12
+// https://carbonplan-share.s3.us-west-2.amazonaws.com/vector_web/geoparquet/CA/CA_rgs_100mb_quadkey_10.parquet/quadkey_10%3D0212233312/data_0.parquet
+// https://carbonplan-share.s3.us-west-2.amazonaws.com/vector_web/geoparquet/CA/CA_s2_level_13_partition_level_8.parquet/quadkey_8%3D02122333/data_0.parquet
+
+const MIN_ZOOM = 13
+const QUADKEY_ZOOM = 8
 
 function calculateQuadkeys(map, targetZoom = QUADKEY_ZOOM) {
   if (map.getZoom() < MIN_ZOOM) {
@@ -208,6 +211,7 @@ export default function QuadkeyPage() {
         getLineColor: [98, 123, 193],
         lineWidthMinPixels: 1,
         pickable: true,
+        beforeId: 'buildings',
       })
 
       overlayRef.current.setProps({
