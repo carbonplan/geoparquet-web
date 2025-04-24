@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { MapboxOverlay } from '@deck.gl/mapbox'
-import { ParquetDataset, set_panic_hook } from '@geoarrow/geoparquet-wasm'
 import { tableFromIPC } from 'apache-arrow'
 import { GeoArrowPolygonLayer } from '@geoarrow/deck.gl-layers'
 import { useMap } from '../components/MapContext'
+import { useWasm } from '../components/WasmContext'
 
 const BASE_URL =
   'https://carbonplan-share.s3.amazonaws.com/vector_web/geoparquet/CA/CA_s2_level_15_partition_level_8_RGS5k.parquet'
@@ -63,14 +63,15 @@ function calculateQuadkeys(map, targetZoom = QUADKEY_ZOOM) {
 
 export default function QuadkeyPage() {
   const { map } = useMap()
+  const { isWasmInitialized, wasmModule } = useWasm()
   console.log('QuadkeyDemo rendered with map:', map)
   const parquetRef = useRef(null)
   const overlayRef = useRef(null)
   const [quadkeys, setQuadkeys] = useState([])
 
   useEffect(() => {
-    if (!map) {
-      console.log('Map not available yet')
+    if (!map || !isWasmInitialized || !wasmModule) {
+      console.log('Map or WASM not available yet')
       return
     }
 
@@ -111,9 +112,11 @@ export default function QuadkeyPage() {
         console.log('Error during cleanup:', error)
       }
     }
-  }, [map])
+  }, [map, isWasmInitialized, wasmModule])
 
   useEffect(() => {
+    if (!wasmModule) return
+
     console.log('Quadkeys changed:', quadkeys)
     const setParquet = async () => {
       if (!quadkeys || quadkeys.length === 0) {
@@ -138,7 +141,7 @@ export default function QuadkeyPage() {
       console.log('Quadkeys to fetch:', quadkeys)
 
       try {
-        const dataset = await new ParquetDataset(
+        const dataset = await new wasmModule.ParquetDataset(
           BASE_URL,
           quadkeys.map(
             (quadkey) => `quadkey_${QUADKEY_ZOOM}=${quadkey}/data_0.parquet`
@@ -157,12 +160,12 @@ export default function QuadkeyPage() {
     }
 
     setParquet()
-  }, [quadkeys, map])
+  }, [quadkeys, map, wasmModule])
 
   async function updateData() {
     console.log('updateData called')
-    if (!map || !parquetRef.current || !overlayRef.current) {
-      console.log('Map, overlay, or parquet not available yet')
+    if (!map || !parquetRef.current || !overlayRef.current || !wasmModule) {
+      console.log('Map, overlay, parquet, or WASM module not available yet')
       return
     }
 
@@ -191,8 +194,6 @@ export default function QuadkeyPage() {
         ymax: ['bbox', 'ymax'],
       },
     }
-
-    set_panic_hook()
 
     try {
       const table = await parquetRef.current.read(readOptions)

@@ -6,6 +6,7 @@ import '@carbonplan/components/globals.css'
 import theme from '@carbonplan/theme'
 import Layout from '../components/Layout'
 import { MapProvider } from '../components/MapContext'
+import { WasmProvider } from '../components/WasmContext'
 
 const App = ({ Component, pageProps }) => {
   return (
@@ -17,11 +18,13 @@ const App = ({ Component, pageProps }) => {
           src='https://carbonplan.org/js/script.file-downloads.outbound-links.js'
         />
       )}
-      <MapProvider>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </MapProvider>
+      <WasmProvider>
+        <MapProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </MapProvider>
+      </WasmProvider>
     </ThemeProvider>
   )
 }
