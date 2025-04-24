@@ -3,7 +3,7 @@ import { geojson } from 'flatgeobuf'
 import { useMap } from '../components/MapContext'
 
 const BASE_URL =
-  'https://carbonplan-ocr.s3.us-west-2.amazonaws.com/intermediate/fire-risk/vector/CONUS_12_risk_scores.fgb'
+  'https://carbonplan-share.s3.amazonaws.com/vector_web/flatgeobuff/CA/CA_overture_buildings.fgb'
 
 const MIN_ZOOM = 13
 
