@@ -1,33 +1,80 @@
 import React, { useState, useEffect } from 'react'
 import { Box, Flex } from 'theme-ui'
-import { Column, Row, Select } from '@carbonplan/components'
+import { Column, Row, Select, Button, Link } from '@carbonplan/components'
+import { RotatingArrow } from '@carbonplan/icons'
 import { useRouter } from 'next/router'
 import { useMap } from './MapContext'
 
 const explanations = {
   singleparquet: {
     path: 'singleparquet',
-    title: 'Single GeoParquet',
-    description: 'This is a single GeoParquet file.',
+    title: 'Single GeoParquet file',
+    description: (
+      <>
+        Accessing all building footprints in California via a single parquet
+        file, using{' '}
+        <Link href='https://github.com/geoarrow/geoarrow-rs'>
+          @geoarrow/geoparquet-wasm
+        </Link>
+        .
+      </>
+    ),
     minZoom: 13,
+    zoomToLocation: {
+      center: [-118.02014, 33.9168],
+      zoom: 17,
+    },
   },
   quadkey: {
     path: 'quadkey',
     title: 'Quadkey Partitioned GeoParquet',
-    description: 'This is a quadkey partitioned GeoParquet file.',
+    description: (
+      <>
+        Accessing all building footprints in California via quadkey (level 8)
+        partitioned GeoParquet, using{' '}
+        <Link href='https://github.com/geoarrow/geoarrow-rs'>
+          @geoarrow/geoparquet-wasm
+        </Link>
+        .
+      </>
+    ),
     minZoom: 13,
-  },
-  pmtiles: {
-    path: 'pmtiles',
-    title: 'PMTiles',
-    description: 'Vector tiled version of the same GeoParquet dataset.',
-    minZoom: 0,
+    zoomToLocation: {
+      center: [-111.656741, 40.58193],
+      zoom: 17,
+    },
   },
   flatgeobuf: {
     path: 'flatgeobuf',
     title: 'FlatGeobuf',
-    description: 'FlatGeobuf version of the same GeoParquet dataset.',
+    description: (
+      <>
+        <Link href='https://github.com/flatgeobuf/flatgeobuf'>FlatGeobuf</Link>{' '}
+        version of the CA dataset.
+      </>
+    ),
     minZoom: 13,
+    zoomToLocation: {
+      center: [-118.02014, 33.9168],
+      zoom: 17,
+    },
+  },
+  pmtiles: {
+    path: 'pmtiles',
+    title: 'PMTiles',
+    description: (
+      <>
+        Vector tiled version of the same GeoParquet dataset, served with{' '}
+        <Link
+          href='https://protomaps.com/docs/pmtiles'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          PMTiles
+        </Link>
+      </>
+    ),
+    minZoom: 0,
   },
 }
 
@@ -137,6 +184,23 @@ const Picker = () => {
                   </Box>
                 )}
               </Flex>
+
+              {explanations[selected]?.zoomToLocation && (
+                <Button
+                  sx={{ mt: 4 }}
+                  suffix={
+                    <RotatingArrow sx={{ width: 16, height: 16, mb: '3px' }} />
+                  }
+                  onClick={() => {
+                    mapContext.map.flyTo({
+                      center: explanations[selected]?.zoomToLocation.center,
+                      zoom: explanations[selected]?.zoomToLocation.zoom,
+                    })
+                  }}
+                >
+                  zoom to example location
+                </Button>
+              )}
             </>
           )}
         </Column>
