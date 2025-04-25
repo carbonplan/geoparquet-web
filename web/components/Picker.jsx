@@ -65,13 +65,7 @@ const explanations = {
     description: (
       <>
         Vector tiled version of the same GeoParquet dataset, served with{' '}
-        <Link
-          href='https://protomaps.com/docs/pmtiles'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          PMTiles
-        </Link>
+        <Link href='https://protomaps.com/docs/pmtiles'>PMTiles</Link>
       </>
     ),
     minZoom: 0,

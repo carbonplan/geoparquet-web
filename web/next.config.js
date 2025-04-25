@@ -1,5 +1,5 @@
 const nextConfig = {
-  webpack: (config) => {
+  webpack: (config, { isServer }) => {
     config.experiments = {
       ...config.experiments,
       asyncWebAssembly: true,
@@ -9,6 +9,12 @@ const nextConfig = {
       test: /\.wasm$/,
       type: 'webassembly/async',
     })
+    if (!isServer) {
+      config.output.environment = {
+        ...config.output.environment,
+        asyncFunction: true,
+      }
+    }
 
     return config
   },
