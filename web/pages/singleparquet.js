@@ -18,7 +18,6 @@ export default function SingleParquetPage() {
 
   useEffect(() => {
     if (!map || !isWasmInitialized || !wasmModule) {
-      console.log('Map or WASM not available yet')
       return
     }
 
@@ -31,11 +30,8 @@ export default function SingleParquetPage() {
 
     const fetchParquetMeta = async () => {
       if (parquetRef.current) {
-        console.log('Parquet already loaded, skipping fetch')
         return
       }
-
-      console.log('Fetching parquet data from:', BASE_URL)
 
       try {
         const dataset = await new wasmModule.ParquetFile(BASE_URL)

@@ -12,7 +12,6 @@ export default function FlatGeoBufPage() {
 
   useEffect(() => {
     if (!map || !isMapLoaded) {
-      console.log('Map not available yet')
       return
     }
 
@@ -77,7 +76,6 @@ export default function FlatGeoBufPage() {
 
   async function updateData() {
     if (!map) {
-      console.log('Map not available yet')
       return
     }
 

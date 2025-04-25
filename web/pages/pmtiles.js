@@ -9,7 +9,6 @@ export default function PmtilesPage() {
   const { map } = useMap()
   useEffect(() => {
     if (!map) {
-      console.log('Map not available yet')
       return
     }
 

@@ -26,7 +26,6 @@ export function WasmProvider({ children }) {
 
         setWasmModule(module)
         setWasmInitialized(true)
-        console.log('WebAssembly initialized successfully')
       } catch (error) {
         console.error('Failed to initialize WebAssembly:', error)
       }

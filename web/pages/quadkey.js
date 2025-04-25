@@ -18,7 +18,6 @@ const QUADKEY_ZOOM = 8
 
 function calculateQuadkeys(map, targetZoom = QUADKEY_ZOOM) {
   if (map.getZoom() < MIN_ZOOM) {
-    console.log('Zoom level below minimum, returning empty quadkeys')
     return []
   }
   const bounds = map.getBounds()
@@ -64,14 +63,12 @@ function calculateQuadkeys(map, targetZoom = QUADKEY_ZOOM) {
 export default function QuadkeyPage() {
   const { map } = useMap()
   const { isWasmInitialized, wasmModule } = useWasm()
-  console.log('QuadkeyDemo rendered with map:', map)
   const parquetRef = useRef(null)
   const overlayRef = useRef(null)
   const [quadkeys, setQuadkeys] = useState([])
 
   useEffect(() => {
     if (!map || !isWasmInitialized || !wasmModule) {
-      console.log('Map or WASM not available yet')
       return
     }
 
@@ -81,10 +78,8 @@ export default function QuadkeyPage() {
     })
     map.addControl(overlay)
     overlayRef.current = overlay
-    console.log('Added deck.gl overlay to map')
 
     const initialQuadkeys = calculateQuadkeys(map)
-    console.log('Initial quadkeys:', initialQuadkeys)
     setQuadkeys(initialQuadkeys)
 
     const moveEndHandler = () => {
@@ -120,7 +115,6 @@ export default function QuadkeyPage() {
     console.log('Quadkeys changed:', quadkeys)
     const setParquet = async () => {
       if (!quadkeys || quadkeys.length === 0) {
-        console.log('No quadkeys found, skipping fetch')
         return
       }
 
@@ -136,9 +130,6 @@ export default function QuadkeyPage() {
           return
         }
       }
-
-      console.log('Fetching parquet data from:', BASE_URL)
-      console.log('Quadkeys to fetch:', quadkeys)
 
       try {
         const dataset = await new wasmModule.ParquetDataset(
@@ -163,9 +154,7 @@ export default function QuadkeyPage() {
   }, [quadkeys, map, wasmModule])
 
   async function updateData() {
-    console.log('updateData called')
     if (!map || !parquetRef.current || !overlayRef.current || !wasmModule) {
-      console.log('Map, overlay, parquet, or WASM module not available yet')
       return
     }
 
@@ -183,8 +172,6 @@ export default function QuadkeyPage() {
       bounds.getNorth(),
     ]
 
-    console.log('Updating data for bbox:', bbox)
-
     const readOptions = {
       bbox,
       bboxPaths: {
@@ -200,7 +187,6 @@ export default function QuadkeyPage() {
 
       const arrowIPCStream = table.intoIPCStream()
       const jsTable = tableFromIPC(arrowIPCStream)
-      console.log('Table converted to IPC, rows:', jsTable.numRows)
 
       const polygonLayer = new GeoArrowPolygonLayer({
         id: 'polygon-layer',
@@ -222,7 +208,6 @@ export default function QuadkeyPage() {
       console.log('Layer updated with', jsTable.numRows, 'features')
     } catch (err) {
       console.error('Error in updateData:', err)
-      // Clear layers on error to prevent UI crashes
       if (overlayRef.current) {
         overlayRef.current.setProps({ layers: [] })
       }
