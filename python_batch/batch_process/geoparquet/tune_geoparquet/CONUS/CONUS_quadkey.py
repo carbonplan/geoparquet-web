@@ -5,7 +5,7 @@
 # COILED --tag project=OCR
 
 import duckdb
-from gpq.utils import apply_s3_creds, install_load_extensions
+from gpq_utils.utils import apply_s3_creds, install_load_extensions
 
 # apply s3 creds and load duckdb extensions
 install_load_extensions()
