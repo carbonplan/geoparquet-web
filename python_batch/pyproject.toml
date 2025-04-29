@@ -1,15 +1,12 @@
 [project]
-name = "gpq-web"
+name = "python-batch"
 version = "0.1.0"
-description = "Example repo for exporing Geoparquet in the browser"
+description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
-    "boto3>=1.37.35",
-    "coiled>=1.92.0",
+    "boto3>=1.37.1",
+    "coiled>=1.93.0",
     "duckdb>=1.2.2",
     "pre-commit>=4.2.0",
 ]
-
-[tool.uv.sources]
-geoparquet-tools = { git = "https://github.com/cholmes/geoparquet-tools" }
