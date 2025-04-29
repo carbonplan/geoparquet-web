@@ -8,8 +8,6 @@ dependencies = [
     "boto3>=1.37.35",
     "coiled>=1.92.0",
     "duckdb>=1.2.2",
-    "geoparquet-tools",
-    "ipython>=9.1.0",
     "pre-commit>=4.2.0",
 ]
 
