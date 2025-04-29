@@ -26,18 +26,6 @@ npm run dev
 
 and then visit `http://localhost:4000/` in your browser.
 
-## repo structure
-
-- Add batch notebooks (these are probably good b/c we can run with or without coiled.)
-  - subset geoparquet to bbox
-  - [optional] - write hilbert curve
-  - row group size knob
-  - spatial partitioning knob
-  - query performance
-    - standard geoparquet
-    - hive partitoned (web optimized) geoparquet
-    - gpkg or... FGB
-
 ## license
 
 All the code in this repository is [MIT](https://choosealicense.com/licenses/mit/)-licensed, but we request that you please provide attribution if reusing any of our digital content (graphics, logo, articles, etc.).
