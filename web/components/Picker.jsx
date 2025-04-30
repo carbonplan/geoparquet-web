@@ -11,7 +11,7 @@ const explanations = {
     title: 'Single GeoParquet file',
     description: (
       <>
-        Accessing all building footprints in California via a single parquet
+        Accessing all building footprints in Los Angeles via a single parquet
         file, using{' '}
         <Link href='https://github.com/geoarrow/geoarrow-rs'>
           @geoarrow/geoparquet-wasm
@@ -40,7 +40,7 @@ const explanations = {
     ),
     minZoom: 13,
     zoomToLocation: {
-      center: [-111.656741, 40.58193],
+      center: [-118.02014, 33.9168],
       zoom: 17,
     },
   },
