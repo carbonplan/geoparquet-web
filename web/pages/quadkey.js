@@ -8,12 +8,7 @@ import { useWasm } from '../components/WasmContext'
 const BASE_URL =
   'https://carbonplan-share.s3.amazonaws.com/vector_web/geoparquet/CA/CA_s2_level_15_partition_level_8_RGS5k.parquet'
 
-// https://carbonplan-share.s3.us-west-2.amazonaws.com/vector_web/geoparquet/CONUS/CONUS_rgs_1mb_quadkey_12.parquet/quadkey_12%3D021223111102/data_0.parquet
-
-// https://carbonplan-share.s3.us-west-2.amazonaws.com/vector_web/geoparquet/CA/CA_rgs_100mb_quadkey_10.parquet/quadkey_10%3D0212233312/data_0.parquet
-// https://carbonplan-share.s3.us-west-2.amazonaws.com/vector_web/geoparquet/CA/CA_s2_level_13_partition_level_8.parquet/quadkey_8%3D02122333/data_0.parquet
-
-const MIN_ZOOM = 13
+const MIN_ZOOM = 14
 const QUADKEY_ZOOM = 8
 
 function calculateQuadkeys(map, targetZoom = QUADKEY_ZOOM) {
@@ -112,8 +107,13 @@ export default function QuadkeyPage() {
   useEffect(() => {
     if (!wasmModule) return
 
-    console.log('Quadkeys changed:', quadkeys)
     const setParquet = async () => {
+      if (map?.getZoom() < MIN_ZOOM) {
+        console.log('Zoom level below minimum, clearing layers')
+        overlayRef.current.setProps({ layers: [] })
+        return
+      }
+
       if (!quadkeys || quadkeys.length === 0) {
         return
       }
@@ -155,12 +155,6 @@ export default function QuadkeyPage() {
 
   async function updateData() {
     if (!map || !parquetRef.current || !overlayRef.current || !wasmModule) {
-      return
-    }
-
-    if (map.getZoom() < MIN_ZOOM) {
-      console.log('Zoom level below minimum, clearing layers')
-      overlayRef.current.setProps({ layers: [] })
       return
     }
 

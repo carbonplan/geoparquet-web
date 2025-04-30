@@ -8,7 +8,7 @@ import { useWasm } from '../components/WasmContext'
 const BASE_URL =
   'https://carbonplan-share.s3.amazonaws.com/vector_web/geoparquet/LA_region/LA_rgs_1mb.parquet'
 
-const MIN_ZOOM = 13
+const MIN_ZOOM = 14
 
 export default function SingleParquetPage() {
   const { map } = useMap()
