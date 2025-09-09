@@ -24,7 +24,8 @@ using four methods:
 The `processing` folder contains recipes for how the underlying GeoParquet data
 was created.
 
-We presented our findings at the 2025 Cloud Native Geo conference. Our slides
+We [presented](https://youtu.be/SsjNPFv5dgI?si=OiRPGdue7CXL-0t8) our findings at 
+the 2025 Cloud Native Geo conference. Our slides
 can be found [here](https://decks.carbonplan.org/cng/04-30-25).
 
 ## usage
